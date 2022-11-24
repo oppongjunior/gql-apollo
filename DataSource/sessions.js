@@ -15,6 +15,10 @@ class SessionAPI extends DataSource {
     const session = _.filter(sessions, {id:parseInt(id)})
     return session[0]
   }
+  getSpeakers(){
+
+    return 0
+  }
 }
 
 

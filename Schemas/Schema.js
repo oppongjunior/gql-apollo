@@ -1,8 +1,30 @@
 const { gql } = require("apollo-server");
 module.exports = gql`
-type Query {
-  sessions(
-    id: ID
+  type Query {
+    sessions(
+      id: ID
+      title: String
+      description: String
+      startsAt: String
+      endsAt: String
+      room: String
+      day: String
+      format: String
+      track: String
+      level: String
+    ): [Session]
+    sessionById(id: ID): Session,
+    speakers:[Speaker],
+    speakerById:Speaker
+  }
+  type Speaker{
+    id:ID!,
+    bio:String,
+    name:String,
+    sessions:[Session]
+  }
+  type Session {
+    id: ID!
     title: String
     description: String
     startsAt: String
@@ -10,22 +32,7 @@ type Query {
     room: String
     day: String
     format: String
-    track: String
+    track: String @deprecated(reason: "This will be deprecated soon")
     level: String
-  ): [Session]
-
-  sessionById(id: ID): Session
-}
-type Session {
-  id: ID!
-  title: String
-  description: String
-  startsAt: String
-  endsAt: String
-  room: String
-  day: String
-  format: String
-  track: String @deprecated(reason: "This will be deprecated soon")
-  level: String
-}
+  }
 `;
